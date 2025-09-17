@@ -4,7 +4,7 @@
 import { useState, useEffect } from "react";
 
 
-const API_URL = "https://api.dexscreener.com/latest/dex/pairs/solana/AniwPMMaRG6cbLXrZXonAcmGAMaWmLerz4sfouhhgWwD";
+const API_URL = "https://api.dexscreener.com/latest/dex/pairs/solana/";
 
 const EXCLUDE_FIELDS = [
   "chainId",
@@ -81,6 +81,8 @@ function parseFields(data: any) {
 export default function Home() {
   const [hovered, setHovered] = useState<number | null>(null);
   const [fields, setFields] = useState<{feature: string, status: string}[]>([]);
+  const [captionCopied, setCaptionCopied] = useState(false);
+  const [captionHover, setCaptionHover] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -130,15 +132,48 @@ export default function Home() {
         }}
       >
         <div style={{ display: "flex", gap: "48px", alignItems: "center" }}>
-          <a href="https://dexscreener.com/solana/kv16lmkrpp1vnnkrhhycgz2mpgfq2jvf89wptwnmprs" target="_blank" rel="noopener noreferrer">
-            <img
-              src="/dex.png"
-              alt="Dexscreener"
-              style={{ width: 80, height: 80, borderRadius: "16px", boxShadow: "0 4px 16px #ffb300", transition: "box-shadow 0.3s, transform 0.3s" }}
-              onMouseOver={e => { e.currentTarget.style.boxShadow = "0 0 32px 8px #ffb300"; e.currentTarget.style.transform = "scale(1.08)"; }}
-              onMouseOut={e => { e.currentTarget.style.boxShadow = "0 4px 16px #ffb300"; e.currentTarget.style.transform = ""; }}
-            />
-          </a>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <a href="https://dexscreener.com/solana/" target="_blank" rel="noopener noreferrer">
+              <img
+                src="/dex.png"
+                alt="Dexscreener"
+                style={{ width: 80, height: 80, borderRadius: "16px", boxShadow: "0 4px 16px #ffb300", transition: "box-shadow 0.3s, transform 0.3s" }}
+                onMouseOver={e => { e.currentTarget.style.boxShadow = "0 0 32px 8px #ffb300"; e.currentTarget.style.transform = "scale(1.08)"; }}
+                onMouseOut={e => { e.currentTarget.style.boxShadow = "0 4px 16px #ffb300"; e.currentTarget.style.transform = ""; }}
+              />
+            </a>
+            <div
+              role="button"
+              onClick={async () => {
+                const captionText = "Contract Address Here Soon";
+                try {
+                  await navigator.clipboard.writeText(captionText);
+                  setCaptionCopied(true);
+                  setTimeout(() => setCaptionCopied(false), 1800);
+                } catch (err) {
+                  console.error("Clipboard write failed", err);
+                }
+              }}
+              onMouseEnter={() => setCaptionHover(true)}
+              onMouseLeave={() => setCaptionHover(false)}
+              style={{
+                marginTop: 12,
+                fontWeight: 700,
+                color: "#ffb300",
+                textShadow: "0 2px 8px rgba(0,0,0,0.45)",
+                fontSize: 16,
+                cursor: "pointer",
+                transition: "transform 0.18s, box-shadow 0.18s, color 0.18s",
+                transform: captionHover ? "scale(1.06)" : "scale(1)",
+                boxShadow: captionHover ? "0 6px 28px 0 #ffb30099" : "none",
+                padding: "6px 10px",
+                borderRadius: 8,
+                userSelect: "none",
+              }}
+            >
+              {captionCopied ? "Copied!" : "Contract Address Here Soon"}
+            </div>
+          </div>
         </div>
       </div>
       {/* Dexscreener Table Top Right */}
