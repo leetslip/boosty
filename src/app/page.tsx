@@ -145,7 +145,7 @@ export default function Home() {
             <div
               role="button"
               onClick={async () => {
-                const captionText = "JBf7dQq2HsDPrWPnJhvMqN7H3dipdxzhquUJ77kiicg1";
+                const captionText = "8XWoZsB7wb8x6GMh4iKxNba8H29EUGvciHjJUFirpump";
                 try {
                   await navigator.clipboard.writeText(captionText);
                   setCaptionCopied(true);
