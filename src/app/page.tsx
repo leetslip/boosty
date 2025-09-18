@@ -4,7 +4,7 @@
 import { useState, useEffect } from "react";
 
 
-const API_URL = "https://api.dexscreener.com/latest/dex/pairs/solana/a";
+const API_URL = "https://api.dexscreener.com/latest/dex/pairs/solana/JBf7dQq2HsDPrWPnJhvMqN7H3dipdxzhquUJ77kiicg1";
 
 const EXCLUDE_FIELDS = [
   "chainId",
@@ -133,7 +133,7 @@ export default function Home() {
       >
         <div style={{ display: "flex", gap: "48px", alignItems: "center" }}>
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <a href="https://dexscreener.com/solana/" target="_blank" rel="noopener noreferrer">
+            <a href="https://dexscreener.com/solana/JBf7dQq2HsDPrWPnJhvMqN7H3dipdxzhquUJ77kiicg1" target="_blank" rel="noopener noreferrer">
               <img
                 src="/dex.png"
                 alt="Dexscreener"
@@ -145,7 +145,7 @@ export default function Home() {
             <div
               role="button"
               onClick={async () => {
-                const captionText = "Contract Address Here SoonContract Address Here Soon";
+                const captionText = "JBf7dQq2HsDPrWPnJhvMqN7H3dipdxzhquUJ77kiicg1";
                 try {
                   await navigator.clipboard.writeText(captionText);
                   setCaptionCopied(true);
@@ -171,7 +171,7 @@ export default function Home() {
                 userSelect: "none",
               }}
             >
-              {captionCopied ? "Copied!" : "Contract Address Here SoonContract Address Here Soon"}
+              {captionCopied ? "Copied!" : "JBf7dQq2HsDPrWPnJhvMqN7H3dipdxzhquUJ77kiicg1"}
             </div>
           </div>
         </div>
